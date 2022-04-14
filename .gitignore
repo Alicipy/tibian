@@ -1,0 +1,11 @@
+config.yaml
+
+.coverage
+.idea
+.vscode
+.*swp
+dist
+reports
+junit-reports
+**/__pycache__
+
