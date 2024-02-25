@@ -636,9 +636,10 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [metadata]
-lock-version = "1.1"
-python-versions = "^3.8"
-content-hash = "546e1db09bdfeddbb13f958cb75768a57798db07c58304fb45f6b35de8432787"
+lock-version = "2.0"
+python-versions = "^3.9,<3.12"
+content-hash = "68c885e97a8271a21fb27a3db4aa33bbd75339fc9d12cd5c36702e8d6f1315da"
+
 
 [metadata.files]
 attrs = []
