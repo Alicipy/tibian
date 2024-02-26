@@ -21,7 +21,7 @@ For details about configuration, visit section `Configuration`.
 
 To install the project, run one of the following command::
 
-    poetry install --no-dev # or
+    poetry install # or
     pip install tibian
 
 Later one is preferred, as it installs the project with the same versions
@@ -72,7 +72,7 @@ We use poetry_ for the development of tibian. You can install it with the follow
 
 To install all development dependencies, run::
 
-    poetry install
+    poetry install --with dev
 
 Afterwards, you have all dependencies (including dev dependencies) installed in a virtualenv, and are able to develop.
 
