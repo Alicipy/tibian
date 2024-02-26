@@ -16,4 +16,3 @@ destinations:
   name: 'my-teams-channel'
   config:
     url: 'https://company.webhook.office.com/webhookb2/abcde12f-...'
-

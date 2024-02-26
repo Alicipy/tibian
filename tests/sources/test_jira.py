@@ -34,7 +34,6 @@ class TestJiraSource:
         jira_mock.assert_called_once_with("jira_url", auth=("jira_username", "jira_password"))
 
     def test_get_open_tickets(self, jira_source_mock):
-
         jira_issue_responses = [
             [
                 Issue(

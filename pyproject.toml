@@ -18,34 +18,15 @@ jira = "^3.1.1"
 requests = "^2.27.1"
 python-dateutil = "^2.8.2"
 PyYAML = "^6.0"
-types-requests = "^2.27.14"
-types-python-dateutil = "^2.8.10"
-types-PyYAML = "^6.0.5"
 
 [tool.poetry.dev-dependencies]
-bandit = "^1.7.4"
-black = "^22.3.0"
-flake8 = "^4.0.1"
-flake8-bugbear = "^22.3.20"
-isort = "^5.10.1"
-mypy = "^0.942"
+pre-commit = "^3.6.2"
 pytest = "^7.1.1"
 pytest-cov = "^3.0.0"
 pytest-mock = "^3.7.0"
-pyproject-flake8 = "^0.0.1-alpha.2"
-types-python-dateutil = "^2.8.10"
 freezegun = "^1.2.1"
 requests-mock = "^1.9.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.isort]
-profile = "black"
-
-[tool.black]
-line-length = 100
-
-[tool.flake8]
-max-line-length = 100

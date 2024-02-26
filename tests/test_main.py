@@ -5,7 +5,6 @@ from tibian.tickets import BirthdayTicket, Ticket
 
 
 def test_main(mocker):
-
     mocker.patch("tibian.vars.get_today", return_value=datetime.date(2022, 3, 1))
 
     mocker.patch("tibian.main.load_config", return_value={"sources": [], "destinations": []})

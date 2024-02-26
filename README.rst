@@ -87,13 +87,18 @@ To activate your virtualenv, run::
 Afterwards, you can run all following commands in the virtualenv. In case you don't, you have to add 'poetry run' before each
 of the next commands to execute it in the virtualenv, or you will get missing requirements errors.
 
-To run the style checker, run::
+Additionally, we use `pre-commit`_ as our tool to enforce some styling and lint rules. To install pre-commit, run::
 
-    ./scripts/lint.sh
+    pre-commit install
+
+This will install all hooks and run them automatically on a commit. You can also run these rules manually by doing::
+
+    pre-commit run --all
 
 To run the tests and get some coverage information, run::
 
     ./scripts/run_tests.sh
 
 .. _poetry: https://python-poetry.org/
+.. _pre-commit: https://pre-commit.com/
 .. _semantic versioning: https://semver.org/

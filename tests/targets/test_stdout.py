@@ -12,7 +12,6 @@ class TestStdoutTarget:
         assert stdout.name == "stdout_name"
 
     def test_get_open_tickets(self, capsys):
-
         tibian.vars.get_today = mock.Mock(return_value=datetime.date(2022, 3, 1))
 
         birthday_tickets = [

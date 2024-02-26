@@ -9,7 +9,6 @@ from tibian.tickets import Ticket
 
 
 class JiraSource(TicketSource):
-
     TYPENAME = "jira"
 
     def __init__(self, name: str, config: dict, *args, **kwargs) -> None:
@@ -23,7 +22,6 @@ class JiraSource(TicketSource):
         self.project = config["project"]
 
     def get_open_tickets(self) -> List[Ticket]:
-
         block_size = 250
         block_num = 0
         open_issues = []

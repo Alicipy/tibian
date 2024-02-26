@@ -11,7 +11,6 @@ from tibian.targets.target import Target
 
 
 class TeamsTarget(Target):
-
     TYPENAME = "teams"
 
     def __init__(self, name: str, config: dict, *args, **kwargs) -> None:
@@ -19,7 +18,6 @@ class TeamsTarget(Target):
         self.url = config["url"]
 
     def announce_birthdays(self, birthday_tickets: List["BirthdayTicket"]) -> None:
-
         base_content = {
             "@type": "MessageCard",
             "@context": "http://schema.org/extensions",

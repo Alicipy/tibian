@@ -7,13 +7,11 @@ if TYPE_CHECKING:
 
 
 class StdoutTarget(Target):
-
     TYPENAME = "stdout"
 
     def __init__(self, name: str, config: dict, *args, **kwargs) -> None:
         super().__init__(name, config, *args, **kwargs)
 
     def announce_birthdays(self, birthday_tickets: List["BirthdayTicket"]) -> None:
-
         for bt in birthday_tickets:
             print(f"{bt.name} '{bt.title}': {bt.age}")

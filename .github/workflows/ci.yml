@@ -19,7 +19,7 @@ jobs:
           pip install poetry
           poetry install
       - name: Check style of package
-        run: poetry run ./scripts/lint.sh
+        run: poetry run -- pre-commit run --all
       - name: Run tests
         run: poetry run ./scripts/test.sh
       - name: Upload Test Results
