@@ -12,7 +12,6 @@ def _example_config_file():
 
 
 def test_load_config(_example_config_file):
-
     config = tc.load_config(_example_config_file)
 
     assert config is not None
@@ -37,7 +36,6 @@ def test_get_cls_from_possible__invalid_type__raises_valueerror(mocker):
 
 
 def test_construct_objects_based_on_config_type(_example_config_file, mocker):
-
     config = tc.load_config(_example_config_file)
     objs = tc.construct_objects_based_on_config_type(config["destinations"])
 

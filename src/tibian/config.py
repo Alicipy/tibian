@@ -12,7 +12,6 @@ _DEFAULT_CONFIG_PATH = tibian.vars.get_std_config_filepath()
 
 
 def load_config(filepath=_DEFAULT_CONFIG_PATH) -> Dict:
-
     with open(filepath) as c:
         config = yaml.safe_load(c)
 
@@ -22,7 +21,6 @@ def load_config(filepath=_DEFAULT_CONFIG_PATH) -> Dict:
 def get_cls_from_possible(
     entry_type: str, possible: Sequence[Union[Type[TicketSource], Type[Target]]]
 ) -> Union[Type[TicketSource], Type[Target]]:
-
     for pos in possible:
         if pos.TYPENAME == entry_type:
             return pos
@@ -31,7 +29,6 @@ def get_cls_from_possible(
 
 
 def _get_possible_classes() -> List[Union[Type[TicketSource], Type[Target]]]:
-
     possible_clss: List[Union[Type[TicketSource], Type[Target]]] = []
     possible_clss.extend(POSSIBLE_SOURCES)
     possible_clss.extend(POSSIBLE_DESTINATIONS)
@@ -40,7 +37,6 @@ def _get_possible_classes() -> List[Union[Type[TicketSource], Type[Target]]]:
 
 
 def construct_objects_based_on_config_type(configs: Sequence[Dict[str, Any]]) -> Any:
-
     possible_clss = _get_possible_classes()
 
     objects = []

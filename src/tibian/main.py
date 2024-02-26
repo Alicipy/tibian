@@ -7,7 +7,6 @@ from tibian.tickets import (
 
 
 def main():
-
     config = load_config()
 
     sources = construct_objects_based_on_config_type(config["sources"])

@@ -1,5 +1,4 @@
 def test_public_imports():
-
     import tibian.vars as tv
 
     assert tv.get_today()

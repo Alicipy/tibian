@@ -44,7 +44,6 @@ class TestTickets:
         assert t.age == 4
 
     def test_filter_for_birthday_tickets(self):
-
         tibian.vars.get_today = mock.Mock(return_value=datetime.date(2022, 3, 1))
 
         tickets = [
@@ -86,7 +85,6 @@ class TestTickets:
         assert open_tickets == []
 
     def test_announce_birthdays__multiple_targets(self):
-
         ts = [mock.Mock(), mock.Mock()]
         birthday_tickets = [mock.Mock(), mock.Mock()]
 

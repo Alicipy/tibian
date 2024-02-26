@@ -19,7 +19,6 @@ class TestTeamsTarget:
         assert teams_target_mock.url == "https://company.webhook.office.com/webhookb2/abcde12f-..."
 
     def test_get_open_tickets__it_is_some_tickets_birthday(self, teams_target_mock, requests_mock):
-
         birthday_tickets = [
             BirthdayTicket("A", "ABC Ticket subscription", "open", datetime.date(2021, 3, 1)),
             BirthdayTicket("B", "ABC Ticket subscription", "open", datetime.date(2019, 3, 1)),
@@ -41,7 +40,6 @@ class TestTeamsTarget:
         assert history.json()["sections"][0]["text"] == ""
 
     def test_get_open_tickets__it_is_no_tickets_birthday(self, requests_mock, teams_target_mock):
-
         birthday_tickets = []
         teams = teams_target_mock
         requests_mock.post(teams.url)
