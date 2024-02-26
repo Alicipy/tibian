@@ -87,10 +87,6 @@ To activate your virtualenv, run::
 Afterwards, you can run all following commands in the virtualenv. In case you don't, you have to add 'poetry run' before each
 of the next commands to execute it in the virtualenv, or you will get missing requirements errors.
 
-To run the style checker, run::
-
-    ./scripts/lint.sh
-
 To run the tests and get some coverage information, run::
 
     ./scripts/run_tests.sh
