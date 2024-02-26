@@ -18,6 +18,8 @@ jobs:
         run: |
           pip install poetry
           poetry install
+      - name: Check style of package
+        run: poetry run -- pre-commit run --all
       - name: Run tests
         run: poetry run ./scripts/test.sh
       - name: Upload Test Results
