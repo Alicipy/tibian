@@ -25,7 +25,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
-          path: dist/*
+          path: dist
 
   create-pypi-release:
     name: Create PyPi release
@@ -34,8 +34,6 @@ jobs:
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
-        with:
-          path: artifacts
       - name: Upload to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
@@ -58,5 +56,5 @@ jobs:
         with:
           name: Release ${{ steps.vars.outputs.tag }}
           draft: True
-          files: artifacts/**/*
+          files: dist/*
           generate_release_notes: True
