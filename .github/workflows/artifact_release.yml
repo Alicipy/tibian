@@ -25,6 +25,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
+          name: dist
           path: dist
 
   create-pypi-release:
