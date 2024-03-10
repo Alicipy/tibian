@@ -10,22 +10,17 @@ regularly and make some people happy (or angry).
 
 Right now, the project is in a very early stage and it's not fully functional.
 
+Installation + Usage
+--------------------
 
-Usage
------
+To install the package, simply do::
 
-To use this project, you need to create a configuration file in the same directory.
-To start, copy the `config.example.yaml` file to `config.yaml` and edit it.
-The name is important here, because it's used to identify the configuration file.
-For details about configuration, visit section `Configuration`.
-
-To install the project, run one of the following command::
-
-    poetry install # or
     pip install tibian
 
-Later one is preferred, as it installs the project with the same versions
-as we tested before release and in a virtual environment.
+which will install the package locally.
+
+Then, configure the credentials and endpoints for your ticket and announcement
+system as described in `Configuration`.
 
 Afterwards, you can start the project by running the `tibian` command::
 
@@ -37,11 +32,11 @@ as specified.
 Configuration
 -------------
 
-The configuration file for the project must be located in the root folder
-of the execution command. A short (any maybe not complete) description of
-the configuration file is given in `config.example.yaml` on GitHub.
+The configuration file for the project must be located in the working directory
+of the executed command. A short (any maybe not complete) description of
+the configuration file is given in `config.example.yaml on GitHub`_.
 
-Copy this output to a file `config.yaml` in the current directory, add your credentials
+Copy this to a file `config.yaml` in the current directory, add your credentials
 and remove parts you don't need.
 
 Detailed information about all config options will be given soon,
@@ -102,3 +97,4 @@ To run the tests and get some coverage information, run::
 .. _poetry: https://python-poetry.org/
 .. _pre-commit: https://pre-commit.com/
 .. _semantic versioning: https://semver.org/
+.. _config.example.yaml on GitHub: https://github.com/Alicipy/tibian/blob/main/config.example.yaml
