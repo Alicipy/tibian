@@ -1,8 +1,7 @@
-from typing import List
+from typing import List, Any
 
 import dateutil.parser
-from jira import JIRA
-from jira.client import Issue
+from jira import JIRA, Issue  # type: ignore
 
 from tibian.sources.ticketsource import TicketSource
 from tibian.tickets import Ticket
@@ -11,7 +10,7 @@ from tibian.tickets import Ticket
 class JiraSource(TicketSource):
     TYPENAME = "jira"
 
-    def __init__(self, name: str, config: dict, *args, **kwargs) -> None:
+    def __init__(self, name: str, config: dict[str, Any]) -> None:
         super().__init__(name, config)
 
         url = config["url"]

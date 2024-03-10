@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Sequence, Type, Union
+from typing import Dict, List, Sequence, Type, Union, Any
 
 import yaml
 
@@ -11,9 +11,9 @@ from tibian.targets.target import Target
 _DEFAULT_CONFIG_PATH = tibian.vars.get_std_config_filepath()
 
 
-def load_config(filepath=_DEFAULT_CONFIG_PATH) -> Dict:
+def load_config(filepath: str = _DEFAULT_CONFIG_PATH) -> dict[str, Any]:
     with open(filepath) as c:
-        config = yaml.safe_load(c)
+        config: dict[str, Any] = yaml.safe_load(c)
 
     return config
 
