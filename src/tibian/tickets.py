@@ -35,7 +35,7 @@ def filter_for_birthday_tickets(open_tickets: List[Ticket]) -> List[BirthdayTick
     return [BirthdayTicket(*astuple(t)) for t in open_tickets if t.is_tickets_birthday()]
 
 
-def collect_open_tickets(sources: List["TicketSource"]):
+def collect_open_tickets(sources: List["TicketSource"]) -> list[Ticket]:
     open_tickets = []
     for s in sources:
         tickets = s.get_open_tickets()

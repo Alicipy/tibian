@@ -9,9 +9,9 @@ _STD_CONFIG_FILEPATH = "./config.yaml"
 # These functions are meant to be mocked in code
 
 
-def get_today():
+def get_today() -> datetime.date:
     return _DAY
 
 
-def get_std_config_filepath():
+def get_std_config_filepath() -> str:
     return _STD_CONFIG_FILEPATH

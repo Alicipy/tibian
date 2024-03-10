@@ -1,5 +1,5 @@
 import json
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Any
 
 import requests
 
@@ -13,8 +13,8 @@ from tibian.targets.target import Target
 class TeamsTarget(Target):
     TYPENAME = "teams"
 
-    def __init__(self, name: str, config: dict, *args, **kwargs) -> None:
-        super().__init__(name, config, *args, **kwargs)
+    def __init__(self, name: str, config: dict[str, Any]) -> None:
+        super().__init__(name, config)
         self.url = config["url"]
 
     def announce_birthdays(self, birthday_tickets: List["BirthdayTicket"]) -> None:
