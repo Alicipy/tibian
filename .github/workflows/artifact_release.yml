@@ -19,9 +19,9 @@ jobs:
           python-version: '3.x'
       - name: Build package
         run: |
-          pip install poetry
-          poetry self add "poetry-dynamic-versioning[plugin]"
-          poetry build
+          pip install uv
+          uv sync
+          uv build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
