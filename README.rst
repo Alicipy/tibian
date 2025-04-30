@@ -61,25 +61,25 @@ Development
 -----------
 
 We are always happy about active support. If you want to actively develop on tibian, follow the next few commands.
-We use poetry_ for the development of tibian. You can install it with the following command::
+We use uv for the development of tibian. You can install it with the following command::
 
-    pip install poetry
+    pip install uv
 
 To install all development dependencies, run::
 
-    poetry install --with dev
+    uv sync
 
 Afterwards, you have all dependencies (including dev dependencies) installed in a virtualenv, and are able to develop.
 
 To add new dependencies, run::
 
-    poetry add <package>
+    uv add <package>
 
 To activate your virtualenv, run::
 
-    poetry shell
+    . ./venv/bin/activate
 
-Afterwards, you can run all following commands in the virtualenv. In case you don't, you have to add 'poetry run' before each
+Afterwards, you can run all following commands in the virtualenv. In case you don't, you have to add 'uv run' before each
 of the next commands to execute it in the virtualenv, or you will get missing requirements errors.
 
 Additionally, we use `pre-commit`_ as our tool to enforce some styling and lint rules. To install pre-commit, run::
@@ -94,7 +94,7 @@ To run the tests and get some coverage information, run::
 
     ./scripts/run_tests.sh
 
-.. _poetry: https://python-poetry.org/
+.. _uv: https://docs.astral.sh/uv/
 .. _pre-commit: https://pre-commit.com/
 .. _semantic versioning: https://semver.org/
 .. _config.example.yaml on GitHub: https://github.com/Alicipy/tibian/blob/main/config.example.yaml

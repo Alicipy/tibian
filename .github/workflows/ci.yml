@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.x']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
     name: Python ${{ matrix.python-version }} pipeline
     steps:
       - uses: actions/checkout@v4
@@ -16,12 +16,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install package
         run: |
-          pip install poetry
-          poetry install --with dev
+          pip install uv
+          uv sync
       - name: Check style of package
-        run: poetry run -- pre-commit run --all
+        run: uv run -- pre-commit run --all
       - name: Run tests
-        run: poetry run ./scripts/test.sh
+        run: uv run ./scripts/test.sh
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
