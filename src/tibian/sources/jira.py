@@ -1,10 +1,12 @@
 from typing import List, Any
 
 import dateutil.parser
-from jira import JIRA, Issue  # type: ignore
+import requests
 
 from tibian.sources.ticketsource import TicketSource
 from tibian.tickets import Ticket
+
+JIRA_API_PATH = "/rest/api/3"
 
 
 class JiraSource(TicketSource):
@@ -15,32 +17,52 @@ class JiraSource(TicketSource):
 
         url = config["url"]
         auth = config["auth"]
-        username, password = auth["username"], auth["password"]
 
-        self.jira = JIRA(url, auth=(username, password))
-        self.project = config["project"]
+        self._username, self._password = auth["username"], auth["password"]
+
+        self._issue_search_url = f"{url}{JIRA_API_PATH}/search/jql"
+        self._project = config["project"]
 
     def get_open_tickets(self) -> List[Ticket]:
-        block_size = 250
-        block_num = 0
         open_issues = []
+        query_params = {
+            "jql": self._build_jql_query(),
+            "fields": "summary,status,created",
+            "properties": "",
+        }
         while True:
-            start_index = block_num * block_size
-            issues = self.jira.search_issues(f"project = {self.project}", start_index, block_size)
-            if not issues:
-                break
-            block_num += 1
+            response = requests.get(
+                self._issue_search_url,
+                params=query_params,
+                auth=(self._username, self._password),
+                timeout=1,
+                headers={"Accept": "application/json"},
+            )
+            response.raise_for_status()
+            content = response.json()
 
-            for issue in issues:
-                assert isinstance(issue, Issue)
-                if issue.fields.status.name not in ["Closed", "Cancelled", "Done"]:
-                    open_issues.append(
-                        Ticket(
-                            name=issue.key,
-                            title=issue.fields.summary,
-                            status=issue.fields.status.name,
-                            creation_date=dateutil.parser.parse(issue.fields.created).date(),
-                        )
-                    )
+            for issue in content["issues"]:
+                ticket = self._extract_ticket_from_issue(issue)
+                open_issues.append(ticket)
+
+            if not (nextPageToken := content.get("nextPageToken")):
+                break
+
+            query_params["nextPageToken"] = nextPageToken
 
         return open_issues
+
+    def _extract_ticket_from_issue(self, issue: dict[str, Any]) -> Ticket:
+        fields = issue["fields"]
+        key = issue["key"]
+        title = fields["summary"]
+        status = fields["status"]["name"]
+        created = dateutil.parser.parse(fields["created"]).date()
+        ticket = Ticket(key, title, status, created)
+        return ticket
+
+    def _build_jql_query(self) -> str:
+        return f"project = {self._project} AND \
+                status not in (Done, Cancelled, Closed) AND \
+                issuetype in standardIssueTypes() AND \
+                issuetype not in (Epic, Sub-task)"
