@@ -1,6 +1,7 @@
-from typing import List, Any
+from typing import List, Any, Literal
 
 import dateutil.parser
+from pydantic import BaseModel, HttpUrl
 import requests
 
 from tibian.sources.ticketsource import TicketSource
@@ -9,33 +10,32 @@ from tibian.tickets import Ticket
 JIRA_API_PATH = "/rest/api/3"
 
 
+class JiraAuth(BaseModel):
+    username: str
+    password: str
+
+
 class JiraSource(TicketSource):
-    TYPENAME = "jira"
-
-    def __init__(self, name: str, config: dict[str, Any]) -> None:
-        super().__init__(name, config)
-
-        url = config["url"]
-        auth = config["auth"]
-
-        self._username, self._password = auth["username"], auth["password"]
-
-        self._issue_search_url = f"{url}{JIRA_API_PATH}/search/jql"
-        self._project = config["project"]
+    type: Literal["jira"] = "jira"
+    url: HttpUrl
+    project: str
+    auth: JiraAuth
 
     def get_open_tickets(self) -> List[Ticket]:
         open_issues = []
+        search_url = self._get_jira_search_url()
         query_params = {
             "jql": self._build_jql_query(),
             "fields": "summary,status,created",
             "properties": "",
         }
+
         while True:
             response = requests.get(
-                self._issue_search_url,
+                search_url,
                 params=query_params,
-                auth=(self._username, self._password),
-                timeout=1,
+                auth=(self.auth.username, self.auth.password),
+                timeout=5,
                 headers={"Accept": "application/json"},
             )
             response.raise_for_status()
@@ -52,6 +52,9 @@ class JiraSource(TicketSource):
 
         return open_issues
 
+    def _get_jira_search_url(self) -> str:
+        return f"{self.url}{JIRA_API_PATH.strip('/')}/search/jql"
+
     def _extract_ticket_from_issue(self, issue: dict[str, Any]) -> Ticket:
         fields = issue["fields"]
         key = issue["key"]
@@ -62,7 +65,4 @@ class JiraSource(TicketSource):
         return ticket
 
     def _build_jql_query(self) -> str:
-        return f"project = {self._project} AND \
-                status not in (Done, Cancelled, Closed) AND \
-                issuetype in standardIssueTypes() AND \
-                issuetype not in (Epic, Sub-task)"
+        return f"project = {self.project} AND status not in (Done, Cancelled, Closed) AND issuetype in standardIssueTypes() AND issuetype not in (Epic, Sub-task)"

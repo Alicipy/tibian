@@ -1,18 +1,15 @@
 sources:
 - type: 'jira'
   name: 'my-jira'
-  config:
-    url: 'https://jira.company.com/'
-    project: 'ABC'
-    auth:
-      username: 'username'
-      password: 'password'
+  url: 'https://jira.company.com/'
+  project: 'ABC'
+  auth:
+    username: 'username'
+    password: 'password'
 
 destinations:
 - type: 'stdout'
   name: 'my-console'
-  config: {}
 - type: 'teams'
   name: 'my-teams-channel'
-  config:
-    url: 'https://company.webhook.office.com/webhookb2/abcde12f-...'
+  url: 'https://company.webhook.office.com/webhookb2/abcde12f-...'

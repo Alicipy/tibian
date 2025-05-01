@@ -1,6 +1,7 @@
 import json
-from typing import TYPE_CHECKING, List, Any
+from typing import TYPE_CHECKING, Literal, Sequence
 
+from pydantic import HttpUrl
 import requests
 
 if TYPE_CHECKING:
@@ -11,13 +12,10 @@ from tibian.targets.target import Target
 
 
 class TeamsTarget(Target):
-    TYPENAME = "teams"
+    type: Literal["teams"] = "teams"
+    url: HttpUrl
 
-    def __init__(self, name: str, config: dict[str, Any]) -> None:
-        super().__init__(name, config)
-        self.url = config["url"]
-
-    def announce_birthdays(self, birthday_tickets: List["BirthdayTicket"]) -> None:
+    def announce_birthdays(self, birthday_tickets: Sequence["BirthdayTicket"]) -> None:
         base_content = {
             "@type": "MessageCard",
             "@context": "http://schema.org/extensions",
@@ -46,6 +44,8 @@ class TeamsTarget(Target):
 
         headers = {"Content-Type": "application/json"}
 
-        res = requests.post(self.url, data=json.dumps(base_content), headers=headers, timeout=10)
+        res = requests.post(
+            str(self.url), data=json.dumps(base_content), headers=headers, timeout=10
+        )
 
         res.raise_for_status()
