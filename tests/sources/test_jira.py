@@ -9,19 +9,17 @@ from tibian.tickets import Ticket
 @pytest.fixture
 def jira_source():
     yield JiraSource(
-        "jira_name",
-        {
-            "url": "https://jira_url",
-            "auth": {"username": "jira_username", "password": "jira_password"},
-            "project": "jira_project",
-        },
+        name="jira_name",
+        url="https://jira_url",
+        project="jira_project",
+        auth={"username": "jira_username", "password": "jira_password"},
     )
 
 
 class TestJiraSource:
     def test_correct_initialization(self, jira_source):
         assert jira_source.name == "jira_name"
-        assert jira_source._project == "jira_project"
+        assert jira_source.project == "jira_project"
 
     def test_get_open_tickets(self, jira_source, requests_mock):
         requests_mock.get(

@@ -1,5 +1,6 @@
 import datetime
 
+from pydantic import HttpUrl
 import pytest
 
 from tibian.targets.teams import TeamsTarget
@@ -9,14 +10,17 @@ from tibian.tickets import BirthdayTicket
 @pytest.fixture
 def teams_target_mock():
     yield TeamsTarget(
-        "teams_name", {"url": "https://company.webhook.office.com/webhookb2/abcde12f-..."}
+        name="teams_name",
+        url="https://company.webhook.office.com/webhookb2/abcde12f-...",
     )
 
 
 class TestTeamsTarget:
     def test_correct_initialization(self, teams_target_mock):
         assert teams_target_mock.name == "teams_name"
-        assert teams_target_mock.url == "https://company.webhook.office.com/webhookb2/abcde12f-..."
+        assert teams_target_mock.url == HttpUrl(
+            "https://company.webhook.office.com/webhookb2/abcde12f-..."
+        )
 
     def test_get_open_tickets__it_is_some_tickets_birthday(self, teams_target_mock, requests_mock):
         birthday_tickets = [
@@ -25,13 +29,13 @@ class TestTeamsTarget:
         ]
 
         teams = teams_target_mock
-        requests_mock.post(teams.url)
+        requests_mock.post(str(teams.url))
 
         teams.announce_birthdays(birthday_tickets)
 
         history = requests_mock.request_history[0]
         assert history.method == "POST"
-        assert history.url == teams.url
+        assert history.url == str(teams.url)
         assert history.json() is not None
         assert history.json()["sections"][0]["facts"] == [
             {"name": "A", "value": "ABC Ticket subscription (1 year(s))"},
@@ -42,7 +46,7 @@ class TestTeamsTarget:
     def test_get_open_tickets__it_is_no_tickets_birthday(self, requests_mock, teams_target_mock):
         birthday_tickets = []
         teams = teams_target_mock
-        requests_mock.post(teams.url)
+        requests_mock.post(str(teams.url))
 
         teams.announce_birthdays(birthday_tickets)
 

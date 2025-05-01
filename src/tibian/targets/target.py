@@ -1,17 +1,15 @@
 import abc
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Sequence
+
+from pydantic import BaseModel
 
 if TYPE_CHECKING:
     from tibian.tickets import BirthdayTicket
 
 
-class Target(abc.ABC):
-    TYPENAME = "unknown"
-
-    def __init__(self, name: str, config: dict[str, Any]) -> None:
-        super().__init__()
-        self.name = name
+class Target(abc.ABC, BaseModel):
+    name: str
 
     @abc.abstractmethod
-    def announce_birthdays(self, birthday_tickets: list["BirthdayTicket"]) -> None:
+    def announce_birthdays(self, birthday_tickets: Sequence["BirthdayTicket"]) -> None:
         pass

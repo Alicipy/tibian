@@ -1,4 +1,4 @@
-from tibian.config import construct_objects_based_on_config_type, load_config
+from tibian.config import load_config
 from tibian.tickets import (
     announce_birthdays,
     collect_open_tickets,
@@ -7,15 +7,12 @@ from tibian.tickets import (
 
 
 def main() -> None:
-    config = load_config()
+    tibian_config = load_config()
 
-    sources = construct_objects_based_on_config_type(config["sources"])
-    targets = construct_objects_based_on_config_type(config["destinations"])
-
-    open_tickets = collect_open_tickets(sources)
+    open_tickets = collect_open_tickets(tibian_config.sources)
     birthday_tickets = filter_for_birthday_tickets(open_tickets)
 
-    announce_birthdays(targets, birthday_tickets)
+    announce_birthdays(tibian_config.destinations, birthday_tickets)
 
 
 if __name__ == "__main__":

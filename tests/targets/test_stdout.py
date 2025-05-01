@@ -8,7 +8,7 @@ from tibian.tickets import BirthdayTicket
 
 class TestStdoutTarget:
     def test_correct_initialization(self):
-        stdout = StdoutTarget("stdout_name", {})
+        stdout = StdoutTarget(name="stdout_name")
         assert stdout.name == "stdout_name"
 
     def test_get_open_tickets(self, capsys):
@@ -19,7 +19,7 @@ class TestStdoutTarget:
             BirthdayTicket("B", "ABC Ticket subscription", "open", datetime.date(2019, 3, 1)),
         ]
 
-        stdout = StdoutTarget("stdout_name", {})
+        stdout = StdoutTarget(name="stdout_name", type="stdout")
         stdout.announce_birthdays(birthday_tickets)
 
         captured = capsys.readouterr()

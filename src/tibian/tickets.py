@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import astuple, dataclass
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Sequence
 
 if TYPE_CHECKING:
     from tibian.sources.ticketsource import TicketSource
@@ -35,7 +35,7 @@ def filter_for_birthday_tickets(open_tickets: List[Ticket]) -> List[BirthdayTick
     return [BirthdayTicket(*astuple(t)) for t in open_tickets if t.is_tickets_birthday()]
 
 
-def collect_open_tickets(sources: List["TicketSource"]) -> list[Ticket]:
+def collect_open_tickets(sources: Sequence["TicketSource"]) -> list[Ticket]:
     open_tickets = []
     for s in sources:
         tickets = s.get_open_tickets()
@@ -43,6 +43,8 @@ def collect_open_tickets(sources: List["TicketSource"]) -> list[Ticket]:
     return open_tickets
 
 
-def announce_birthdays(targets: List[Target], birthday_tickets: List[BirthdayTicket]) -> None:
+def announce_birthdays(
+    targets: Sequence[Target], birthday_tickets: Sequence[BirthdayTicket]
+) -> None:
     for target in targets:
         target.announce_birthdays(birthday_tickets)
