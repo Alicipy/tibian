@@ -6,6 +6,12 @@ sources:
   auth:
     username: 'username'
     password: 'password'
+- type: 'taiga'
+  name: 'my-taiga'
+  project: 42
+  url: 'https://taiga.example.com'
+  auth:
+    token: my-token
 
 destinations:
 - type: 'stdout'
