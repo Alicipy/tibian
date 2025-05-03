@@ -1,7 +1,7 @@
 import datetime
 
-from pydantic import HttpUrl
 import pytest
+from pydantic import HttpUrl
 
 from tibian.targets.teams import TeamsTarget
 from tibian.tickets import BirthdayTicket

@@ -1,8 +1,9 @@
 import json
-from typing import TYPE_CHECKING, Literal, Sequence
+from collections.abc import Sequence
+from typing import TYPE_CHECKING, Literal
 
-from pydantic import HttpUrl
 import requests
+from pydantic import HttpUrl
 
 if TYPE_CHECKING:
     from tibian.tickets import BirthdayTicket
