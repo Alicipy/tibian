@@ -1,8 +1,8 @@
-from typing import List, Any, Literal
+from typing import Any, Literal
 
 import dateutil.parser
-from pydantic import BaseModel, HttpUrl
 import requests
+from pydantic import BaseModel, HttpUrl
 
 from tibian.sources.ticketsource import TicketSource
 from tibian.tickets import Ticket
@@ -21,7 +21,7 @@ class JiraSource(TicketSource):
     project: str
     auth: JiraAuth
 
-    def get_open_tickets(self) -> List[Ticket]:
+    def get_open_tickets(self) -> list[Ticket]:
         open_issues = []
         search_url = self._get_jira_search_url()
         query_params = {
@@ -65,4 +65,7 @@ class JiraSource(TicketSource):
         return ticket
 
     def _build_jql_query(self) -> str:
-        return f"project = {self.project} AND status not in (Done, Cancelled, Closed) AND issuetype in standardIssueTypes() AND issuetype not in (Epic, Sub-task)"
+        return f"project = {self.project} AND \
+                status not in (Done, Cancelled, Closed) AND \
+                issuetype in standardIssueTypes() AND \
+                issuetype not in (Epic, Sub-task)"

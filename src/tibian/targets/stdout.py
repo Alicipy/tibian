@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Literal, Sequence
+from collections.abc import Sequence
+from typing import TYPE_CHECKING, Literal
 
 from tibian.targets.target import Target
 

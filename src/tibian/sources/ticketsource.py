@@ -1,6 +1,5 @@
 import abc
 
-
 from pydantic import BaseModel
 
 from tibian.tickets import Ticket

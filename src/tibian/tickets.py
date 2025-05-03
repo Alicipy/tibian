@@ -1,6 +1,7 @@
 import datetime
+from collections.abc import Sequence
 from dataclasses import astuple, dataclass
-from typing import TYPE_CHECKING, List, Sequence
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from tibian.sources.ticketsource import TicketSource
@@ -31,7 +32,7 @@ class BirthdayTicket(Ticket):
         return tb_vars.get_today().year - self.creation_date.year
 
 
-def filter_for_birthday_tickets(open_tickets: List[Ticket]) -> List[BirthdayTicket]:
+def filter_for_birthday_tickets(open_tickets: list[Ticket]) -> list[BirthdayTicket]:
     return [BirthdayTicket(*astuple(t)) for t in open_tickets if t.is_tickets_birthday()]
 
 

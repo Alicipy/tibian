@@ -1,13 +1,13 @@
 from typing import Any, Union
-from pydantic import BaseModel
 
 import yaml
+from pydantic import BaseModel
 
+import tibian.vars
 from tibian.sources.jira import JiraSource
 from tibian.sources.taiga import TaigaSource
 from tibian.targets.stdout import StdoutTarget
 from tibian.targets.teams import TeamsTarget
-import tibian.vars
 
 _DEFAULT_CONFIG_PATH = tibian.vars.get_std_config_filepath()
 

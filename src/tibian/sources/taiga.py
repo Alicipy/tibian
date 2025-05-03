@@ -1,8 +1,8 @@
-from typing import List, Any, Literal, Union
+from typing import Any, Literal, Union
 
 import dateutil.parser
-from pydantic import BaseModel, HttpUrl, SecretStr
 import requests
+from pydantic import BaseModel, HttpUrl, SecretStr
 
 from tibian.sources.ticketsource import TicketSource
 from tibian.tickets import Ticket
@@ -20,7 +20,7 @@ class TaigaSource(TicketSource):
     project: int
     auth: TaigaAuth
 
-    def get_open_tickets(self) -> List[Ticket]:
+    def get_open_tickets(self) -> list[Ticket]:
         open_issues = []
         search_url = self._get_taiga_search_url()
         content = self._request_issues(search_url)

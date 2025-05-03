@@ -1,7 +1,9 @@
 import datetime
+
 import pytest
-from pydantic import SecretStr, HttpUrl
-from tibian.sources.taiga import TaigaSource, TaigaAuth
+from pydantic import HttpUrl, SecretStr
+
+from tibian.sources.taiga import TaigaAuth, TaigaSource
 from tibian.tickets import Ticket
 
 
