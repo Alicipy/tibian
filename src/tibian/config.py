@@ -4,6 +4,7 @@ import yaml
 from pydantic import BaseModel
 
 import tibian.vars
+from tibian.sources.azure import AzureSource
 from tibian.sources.jira import JiraSource
 from tibian.sources.taiga import TaigaSource
 from tibian.targets.stdout import StdoutTarget
@@ -13,7 +14,7 @@ _DEFAULT_CONFIG_PATH = tibian.vars.get_std_config_filepath()
 
 
 class TibianConfig(BaseModel):
-    sources: list[Union[JiraSource, TaigaSource]]
+    sources: list[Union[AzureSource, JiraSource, TaigaSource]]
     destinations: list[Union[StdoutTarget, TeamsTarget]]
 
 

@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 import tibian.config as tc
+from tibian.sources.azure import AzureSource
 from tibian.sources.jira import JiraSource
 from tibian.sources.taiga import TaigaSource
 from tibian.targets.stdout import StdoutTarget
@@ -18,9 +19,10 @@ def test_load_example_config(_example_config_file):
     config = tc.load_config(_example_config_file)
 
     assert config.sources is not None
-    assert len(config.sources) == 2
+    assert len(config.sources) == 3
     assert isinstance(config.sources[0], JiraSource)
     assert isinstance(config.sources[1], TaigaSource)
+    assert isinstance(config.sources[2], AzureSource)
 
     assert config.destinations is not None
     assert len(config.destinations) == 2
