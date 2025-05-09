@@ -12,6 +12,12 @@ sources:
   url: 'https://taiga.example.com'
   auth:
     token: my-token
+- type: 'azure'
+  name: 'my-azure'
+  organization: 'my-azure-org'
+  project: 'my-azure-project'
+  auth:
+    token: my-pat-token
 
 destinations:
 - type: 'stdout'
